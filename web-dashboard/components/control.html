@@ -1,0 +1,74 @@
+<section id="tab-control" class="tab-content hidden flex flex-col gap-4">
+  <div>
+    <p class="text-[10px] uppercase tracking-[0.16em] font-bold text-[#94A3B8]">Automation</p>
+    <h2 class="text-lg font-bold text-[#1E293B]">Control & Threshold</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <!-- RELAY KONTROL: POMPA IRIGASI -->
+    <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border-l-8 border-[#16A34A] transition-all" id="card-relay-pompa">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 rounded-xl bg-[#DCFCE7] text-[#16A34A]">
+            <i data-lucide="power" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="font-bold text-[#1E293B]">Pompa Irigasi DC</p>
+            <p class="text-xs text-[#64748B]">Kontrol aktuasi relai ESP32</p>
+          </div>
+        </div>
+        <span id="status-pompa-kontrol" class="text-xl font-extrabold text-[#94A3B8]">OFF</span>
+      </div>
+      
+      <!-- KONTROL MODE & POWER -->
+      <div class="mt-6 flex flex-col gap-3 pt-4 border-t border-[#F1F5F9]">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-[#64748B]">Mode Operasi:</span>
+          <button onclick="toggleModePompa()" class="px-3 py-1.5 rounded-lg bg-[#F1F5F9] text-[#1E293B] text-xs font-bold border border-[#E2E8F0] hover:bg-[#E2E8F0] transition-colors">
+            <span id="text-mode-pompa">AUTO</span> <i data-lucide="refresh-cw" class="w-3 h-3 inline ml-1"></i>
+          </button>
+        </div>
+        <button onclick="togglePowerPompa()" class="w-full py-2.5 rounded-xl bg-[#0284C7] text-white text-xs font-bold shadow-sm hover:bg-[#0369A1] transition-colors">
+          Toggle Power (Manual Only)
+        </button>
+      </div>
+    </div>
+
+    <!-- PENGATURAN THRESHOLD -->
+    <div class="bg-white rounded-2xl p-5 md:p-6 shadow-sm border border-[#E2E8F0] flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 rounded-xl bg-[#F8FAFC] text-[#64748B]">
+            <i data-lucide="sliders-horizontal" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="font-bold text-[#1E293B]">Ambang Batas Kelembaban</p>
+            <p class="text-xs text-[#64748B]">Konfigurasi pemicu AUTO mode</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-3 mt-4">
+          <input type="number" id="input-threshold" placeholder="Contoh: 30" min="0" max="100" class="flex-1 px-4 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-sm font-bold text-[#1E293B] focus:outline-none focus:border-[#0284C7] transition-colors">
+          <span class="text-sm font-bold text-[#64748B]">%</span>
+        </div>
+      </div>
+
+      <button onclick="simpanThreshold()" class="w-full mt-4 py-2.5 rounded-xl bg-[#1E293B] text-white text-xs font-bold shadow-sm hover:bg-[#0F172A] transition-colors">
+        Simpan Konfigurasi
+      </button>
+    </div>
+    
+  </div>
+
+  <!-- BANNER SAFETY -->
+  <div class="bg-[#EFF6FF] border border-[#DBEAFE] rounded-xl p-3.5 flex gap-3 mt-2">
+    <i data-lucide="info" class="w-5 h-5 text-[#0284C7] shrink-0 mt-0.5"></i>
+    <div>
+      <p class="text-xs font-bold text-[#1E293B]">Logika Irigasi (Closed-Loop)</p>
+      <p class="text-[11px] text-[#64748B] mt-0.5">
+        Pada mode AUTO, jika sensor mendeteksi kelembaban di bawah ambang batas (Threshold), maka ESP32 akan menutup kontak relai dan menyalakan Pompa Air.
+      </p>
+    </div>
+  </div>
+</section>
