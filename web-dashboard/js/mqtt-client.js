@@ -1,7 +1,7 @@
 // ==========================================
 // KONFIGURASI MQTT BROKER (HIVEMQ CLOUD)
 // ==========================================
-const broker = "4642497a451f4388a32e286617d1630e.s1.eu.hivemq.cloud";
+const broker = "b97c4c7cd1c34798909531630198c250.s1.eu.hivemq.cloud";
 const port = 8884;
 const clientId = "WebIrigasi-" + Math.floor(Math.random() * 100000);
 
